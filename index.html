@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sri Lakshmi Rudhra Car Booking</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+    header { background: #000; color: #fff; padding: 15px; text-align: center; }
+    .container { padding: 20px; }
+    .card { background: #fff; padding: 15px; margin: 10px 0; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    button { padding: 10px 15px; background: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #218838; }
+    input { padding: 8px; width: 100%; margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Sri Lakshmi Rudhra Car Booking Service</h1>
+  <p>Book your ride easily 🚗</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Book a Car</h2>
+    <form onsubmit="bookCar(event)">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+      <input type="text" id="pickup" placeholder="Pickup Location" required>
+      <input type="text" id="drop" placeholder="Drop Location" required>
+      <input type="number" id="km" placeholder="Distance (KM)" required>
+      <p id="priceDisplay"><strong>Estimated Price: ₹0</strong></p>
+      <button type="submit">Book Now</button>
+      <button type="button" onclick="sendWhatsApp()" style="background:#25D366;margin-top:10px;">Book via WhatsApp</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Available Cars</h2>
+    <ul>
+      <li>🚗 Swift Dzire</li>
+      <li>🚙 Innova</li>
+      <li>🚘 Hyundai i20</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  function calculatePrice() {
+    let km = document.getElementById('km').value;
+    let pricePerKm = 12;
+    let total = km * pricePerKm;
+    document.getElementById('priceDisplay').innerHTML = "<strong>Estimated Price: ₹" + total + "</strong>";
+  }
+
+  document.getElementById('km').addEventListener('input', calculatePrice);
+
+  function sendWhatsApp() {
+    let name = document.getElementById('name').value;
+    let phone = document.getElementById('phone').value;
+    let pickup = document.getElementById('pickup').value;
+    let drop = document.getElementById('drop').value;
+    let km = document.getElementById('km').value;
+    let price = km * 12;
+
+    let message = `New Booking:%0AName: ${name}%0APhone: ${phone}%0APickup: ${pickup}%0ADrop: ${drop}%0ADistance: ${km} KM%0APrice: ₹${price}`;
+    let url = "https://wa.me/919000728081?text=" + message;
+    window.open(url, '_blank');
+  }
+
+  function bookCar(event) {
+    event.preventDefault();
+    let name = document.getElementById('name').value;
+    alert("Thank you " + name + "! Your booking request is received.");
+  }
+</script>
+
+</body>
+</html>
