@@ -1,126 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sri Lakshmi Rudhra Car Booking</title>
+<title>Sri Lakshmi Rudhra Car Booking</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-    }
-
-    header {
-      background: black;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-
-    .container {
-      padding: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: green;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: darkgreen;
-    }
-
-    #price {
-      font-weight: bold;
-      margin-top: 10px;
-    }
-  </style>
+<style>
+body { font-family: Arial; background:#f4f4f4; margin:0; }
+header { background:black; color:white; padding:15px; text-align:center; }
+.container { padding:20px; }
+.card { background:white; padding:15px; margin:10px 0; border-radius:10px; }
+input { width:100%; padding:10px; margin:5px 0; }
+button { width:100%; padding:12px; color:white; border:none; margin-top:10px; border-radius:5px; font-size:16px; }
+#payNow { background:green; }
+#gpay { background:#34B233; }
+#phonepe { background:#742DA0; }
+#price { font-weight:bold; margin-top:10px; }
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Sri Lakshmi Rudhra Car Booking Service 🚗</h1>
-  <p>Fast & Easy Ride Booking</p>
+<h1>Sri Lakshmi Rudhra Car Booking 🚗</h1>
 </header>
 
 <div class="container">
 
-  <div class="card">
-    <h2>Book Your Ride</h2>
+<div class="card">
+<h2>Book Ride</h2>
 
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="text" id="phone" placeholder="Phone Number" required>
-    <input type="text" id="pickup" placeholder="Pickup Location" required>
-    <input type="text" id="drop" placeholder="Drop Location" required>
-    <input type="number" id="km" placeholder="Distance (KM)" required oninput="calculatePrice()">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="pickup" placeholder="Pickup">
+<input id="drop" placeholder="Drop">
+<input id="km" type="number" placeholder="KM" oninput="calc()">
 
-    <p id="price">Estimated Price: ₹0</p>
+<p id="price">Price: ₹0</p>
 
-    <button onclick="bookNow()">💳 Pay & Book Now</button>
-  </div>
+<!-- Payment Buttons -->
+<button id="payNow" onclick="payNow()">💳 Pay Now (UPI)</button>
+<button id="gpay" onclick="payWithGPay()">🟢 Pay with GPay</button>
+<button id="phonepe" onclick="payWithPhonePe()">🟣 Pay with PhonePe</button>
 
-  <div class="card">
-    <h2>Available Cars</h2>
-    <ul>
-      <li>🚗 Swift Dzire</li>
-      <li>🚙 Innova</li>
-      <li>🚘 Hyundai i20</li>
-    </ul>
-  </div>
+<button onclick="whatsapp()">📲 Confirm on WhatsApp</button>
+
+</div>
 
 </div>
 
 <script>
-
-function calculatePrice() {
-  let km = document.getElementById("km").value;
-  let price = km * 12;
-  document.getElementById("price").innerText = "Estimated Price: ₹" + price;
+function calc(){
+    let km = document.getElementById("km").value;
+    document.getElementById("price").innerText = "Price: ₹" + (km * 12);
 }
 
-function bookNow() {
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let pickup = document.getElementById("pickup").value;
-  let drop = document.getElementById("drop").value;
-  let km = document.getElementById("km").value;
-  let price = km * 12;
-
-  if (!name || !phone || !pickup || !drop || !km) {
-    alert("Please fill all details");
-    return;
-  }
-
-  // UPI Payment Link (CHANGE YOUR UPI ID HERE)
-  let upi = "upi://pay?pa=9000728081@upi&pn=SriLakshmiRudhra&am=" 
-            + price + "&cu=INR";
-
-  window.location.href = upi;
+function payNow(){
+    let km = document.getElementById("km").value;
+    let price = km * 12;
+    let upi = "upi://pay?pa=9000728081@upi&pn=SriLakshmiRudhra&am=" + price + "&cu=INR";
+    window.location.href = upi;
 }
 
+function payWithGPay(){
+    let km = document.getElementById("km").value;
+    let price = km * 12;
+    let gpay = "upi://pay?pa=9000728081@upi&pn=SriLakshmiRudhra&am=" + price + "&cu=INR";
+    window.location.href = gpay;
+}
+
+function payWithPhonePe(){
+    let km = document.getElementById("km").value;
+    let price = km * 12;
+    let phonepe = "upi://pay?pa=9000728081@upi&pn=SriLakshmiRudhra&am=" + price + "&cu=INR";
+    window.location.href = phonepe;
+}
+
+function whatsapp(){
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let pickup = document.getElementById("pickup").value;
+    let drop = document.getElementById("drop").value;
+    let km = document.getElementById("km").value;
+    let price = km * 12;
+
+    let msg = `Paid Booking:
+Name: ${name}
+Phone: ${phone}
+Pickup: ${pickup}
+Drop: ${drop}
+KM: ${km}
+Amount Paid: ₹${price}`;
+
+    let url = "https://wa.me/919000728081?text=" + encodeURIComponent(msg);
+    window.open(url,"_blank");
+}
 </script>
 
 </body>
