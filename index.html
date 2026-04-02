@@ -79,7 +79,7 @@
 
     <p id="price">Estimated Price: ₹0</p>
 
-    <button onclick="bookNow()">🚗 Book Now</button>
+    <button onclick="bookNow()">💳 Pay & Book Now</button>
   </div>
 
   <div class="card">
@@ -114,17 +114,11 @@ function bookNow() {
     return;
   }
 
-  let message = `🚗 New Booking:
-Name: ${name}
-Phone: ${phone}
-Pickup: ${pickup}
-Drop: ${drop}
-Distance: ${km} KM
-Price: ₹${price}`;
+  // UPI Payment Link (CHANGE YOUR UPI ID HERE)
+  let upi = "upi://pay?pa=9000728081@upi&pn=SriLakshmiRudhra&am=" 
+            + price + "&cu=INR";
 
-  let url = "https://wa.me/919000728081?text=" + encodeURIComponent(message);
-
-  window.open(url, "_blank");
+  window.location.href = upi;
 }
 
 </script>
